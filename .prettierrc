@@ -1,0 +1,23 @@
+{
+  "trailingComma": "es5",
+  "semi": true,
+  "endOfLine": "auto",
+  "printWidth": 100,
+  "requirePragma": true,
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": "{**/*,*}.{css,ts,tsx,json,md,mjs}",
+      "excludeFiles": [
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/public/**",
+        "**/deployment/**"
+      ],
+      "options": {
+        "requirePragma": false
+      }
+    }
+  ]
+}

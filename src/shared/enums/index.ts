@@ -1,0 +1,15 @@
+export enum ROUTES {
+  NOT_FOUND_ROUTE = "*",
+  ROOT = "/",
+  HOME = "/home",
+  DASHBOARD = "/dashboard",
+  INBOX = "/inbox",
+  PRODUCTS = "/products",
+  INVOICES = "/invoices",
+  CUSTOMERS = "/customers",
+  CHAT_ROOM = "/chat",
+  CALENDAR = "/calendar",
+  HELP_CENTER = "/help",
+  SETTINGS = "/settings",
+  NOTIFICATION = "/notifications",
+}
