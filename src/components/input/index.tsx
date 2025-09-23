@@ -21,7 +21,7 @@ const Input = ({
 
   return (
     <div className="flex items-center w-full">
-      <Search aria-label="search" />
+      <Search aria-label="search" className="text-[#BCBCCB] w-4 h-4" />
       <input
         className={`w-full px-[10px] py-2 focus:outline-none transition-opacity duration-300 ease-in-out ${
           disabled ? "opacity-50 cursor-not-allowed" : "opacity-100 cursor-text"

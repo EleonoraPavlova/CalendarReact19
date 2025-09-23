@@ -26,7 +26,7 @@ const Dropdown = ({ items, user }: Props): ReactElement => {
         <div className="flex items-center w-4 h-4">
           <Arrow
             aria-label="arrowDown"
-            className={`transition-transform duration-300 ${isMenuOpen ? "rotate-180" : ""}`}
+            className={`transition-transform duration-300 w-[11px] h-[7px] text-[#BCBCCB] ${isMenuOpen ? "rotate-180" : ""}`}
           />
         </div>
         <img src={avatar} alt="avatar" className="w-[38px] h-[38px] rounded-full" />

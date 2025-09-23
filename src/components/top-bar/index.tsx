@@ -25,14 +25,14 @@ const TopBar = (): ReactElement => {
         <div className="flex items-center relative pr-[21px] after:content-[''] after:absolute after:top-0 after:right-0 after:h-full after:w-[1px] after:bg-[#E7E9F0]">
           <div className="flex items-center gap-[22px]">
             <Button to={ROUTES.HELP_CENTER} as={Link} variant="icon">
-              <Help className="w-5 h-5" />
+              <Help className="w-5 h-5 text-[#BCBCCB]" />
             </Button>
             <Button to={ROUTES.CHAT_ROOM} as={Link} variant="icon">
-              <Chat className="w-5 h-5" />
+              <Chat className="w-5 h-5 text-[#BCBCCB]" />
             </Button>
             <Button to={ROUTES.NOTIFICATION} as={Link} variant="icon">
               <div className="relative">
-                <Bell className="w-5 h-5" />
+                <Bell className="w-5 h-5 text-[#BCBCCB]" />
                 {userMock.messages.length > 0 && (
                   <span className="absolute -top-0.5 -right-0.5 block h-2 w-2 rounded-full bg-[#FFC06A] ring-2 ring-white"></span>
                 )}
