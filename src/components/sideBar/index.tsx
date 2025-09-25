@@ -9,7 +9,7 @@ type Props = {
 
 const Sidebar = ({ menu }: Props): ReactElement => {
   return (
-    <div className="row-span-1 row-start-2 flex w-[260px] bg-[#43425D] text-white min-h-screen gap-[7px]">
+    <div className="row-span-1 row-start-2 flex w-[260px]  bg-[#43425D] text-white min-h-screen gap-[7px]">
       <nav className="w-full">
         {menu.map((item) => {
           const Icon = item.icon;
@@ -19,7 +19,7 @@ const Sidebar = ({ menu }: Props): ReactElement => {
               to={item.route}
               className={({ isActive }) =>
                 `w-full px-[25px] py-[18px] gap-[12px] flex items-center
-               ${isActive && "bg-[#3c3b54]"}`
+               ${isActive && "bg-[#3c3b54] border-l-[5px] border-l-[#A3A0FB]"}`
               }
             >
               {({ isActive }) => (

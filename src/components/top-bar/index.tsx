@@ -17,10 +17,10 @@ const TopBar = (): ReactElement => {
   const logoName = "IMPEKABLE";
 
   return (
-    <header className="row-span-1 col-span-2 flex items-center h-[70px] shadow-[0px_2px_6px_#0000000A]">
+    <header className="row-span-1 col-span-2 flex items-center h-[70px] shadow-md shadow-black/10">
       <Logo logoName={logoName} />
       <div className="py-4 px-5 flex flex-1 items-center gap-[22px]">
-        <Input placeholder={placeholder} />
+        <Input placeholder={placeholder} isSearch name="search" />
 
         <div className="flex items-center relative pr-[21px] after:content-[''] after:absolute after:top-0 after:right-0 after:h-full after:w-[1px] after:bg-[#E7E9F0]">
           <div className="flex items-center gap-[22px]">

@@ -13,3 +13,93 @@ html {
   height: 100vh;
   max-height: 100vh;
 }
+
+
+/* tooltip */
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade {
+  animation: fade 0.2s ease-out;
+}
+
+
+/* === react-big-calendar overrides === */
+.rbc-btn-group > button {
+  border: 1px solid #D7DAE2 !important;
+  color: #4D4F5C !important;
+  background-color: #FFFFFF !important;
+  box-shadow: 0px 2px 3px #0000000D !important;
+  font-size: 13px !important;
+  &:hover {
+    color: #3B86FF !important;
+  }
+}
+
+.rbc-btn-group > button.rbc-active {
+ color: #3B86FF !important;
+}
+
+.rbc-toolbar-label {
+  color: #4D4F5C!important;
+  font-size:  18px !important;
+  line-height: 13px !important;
+}
+
+.rbc-toolbar {
+  margin-bottom: 24px !important;
+}
+
+.rbc-month-view {
+  border:none!important;
+}
+
+.rbc-header {
+  color: #A3A6B4 !important;
+  font-size: 11px !important;
+  line-height: 14px !important;
+  border-bottom: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-transform: uppercase !important;
+}
+
+.rbc-month-header {
+  height: 45px!important;
+  background:#F5F6FA !important;
+  border: 1px solid #EAF0F4 !important;
+}
+
+.rbc-header + .rbc-header {
+   border-left: none !important;
+}
+
+.rbc-event {
+  background:#3B86FF !important;
+  font-size: 13px !important;
+  font-family: "Source Sans Pro", sans-serif;
+  border-radius:  4px !important;
+  padding: 5px 14px !important;
+}
+
+
+/* for inputs */
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(80%) sepia(0%) saturate(0%) hue-rotate(180deg) brightness(95%);
+  opacity: 1;
+}
+
+input[type="date"]::-webkit-datetime-edit,
+input[type="time"]::-webkit-datetime-edit {
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator  {
+  cursor: pointer;
+}

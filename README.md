@@ -6,6 +6,15 @@ This web app is an interactive calendar for convenient event planning and manage
 
 - SPA architecture with React 19 for scalability
 - react-router-dom for routing
+- Vite for fast builds
+- TypeScript
+- Tailwind CSS
+- localStorage persistence for saving events between sessions
+- Husky/lint-staged for pre-commit hooks
+- Adaptive layout
+- clsx for a clean and readable union of classes
+- ESLint/Prettier for unified style guides and auto-formatting
+
 
 ## Architecture
 

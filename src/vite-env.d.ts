@@ -4,3 +4,7 @@ declare module "*.svg?react" {
   const ReactComponent: React.FC<React.SVGProps<SVGSVGElement>>;
   export default ReactComponent;
 }
+
+declare module "react-big-calendar";
+
+declare module "react-big-calendar/lib/addons/dragAndDrop";
