@@ -5,6 +5,11 @@ declare module "*.svg?react" {
   export default ReactComponent;
 }
 
+declare module "*.webp" {
+  const value: string;
+  export default value;
+}
+
 declare module "react-big-calendar";
 
 declare module "react-big-calendar/lib/addons/dragAndDrop";

@@ -6,7 +6,9 @@ import { ReactElement, useCallback, useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 
-import CalendarPopup, { CalendarEvent } from "@/components/calendar/calendar-popup";
+import { CalendarEvent } from "@/components/calendar/calendar.types";
+import CalendarPopup from "@/components/calendar/calendar-popup";
+import { useEventStyle } from "@/components/calendar/useEventStyle";
 import Tooltip from "@/components/tooltip";
 
 const localizer = momentLocalizer(moment);
@@ -15,16 +17,21 @@ const DnDCalendar = withDragAndDrop(Calendar);
 const CalendarComponent = (): ReactElement => {
   const eventState: CalendarEvent[] = [
     {
+      id: 1,
       title: "Event name",
       start: moment().toDate(),
       end: moment().add(1, "days").toDate(),
       notes: "",
+      color: "blue",
     },
   ];
   const [tooltip, setTooltip] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isOpenEvent, setIsOpenEvent] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
+  const [selectedColor, setSelectedColor] = useState<CalendarEvent["color"]>(eventState[0].color);
+
+  const { eventStyleGetter } = useEventStyle();
 
   const STORAGE_KEY = "calendar-events";
 
@@ -77,25 +84,35 @@ const CalendarComponent = (): ReactElement => {
   const onSelectEvent = useCallback((event: CalendarEvent) => {
     const now = new Date();
     if (event.end < now) {
-      showTooltip("⏳ The event in the past");
+      showTooltip("The event in the past");
       return;
     }
 
     setSelectedEvent(event);
+    setSelectedColor(event.color);
     setSelectedDate(null);
     setIsOpenEvent(true);
   }, []);
 
   const handleSaveEvent = (eventData: CalendarEvent) => {
+    const eventWithColor = { ...eventData, color: selectedColor };
+
     if (eventData.id) {
-      setEvents((prev) => prev.map((ev) => (ev.id === eventData.id ? eventData : ev)));
+      setEvents((prev) => prev.map((ev) => (ev.id === eventData.id ? eventWithColor : ev)));
     } else {
       const newEvent = {
-        ...eventData,
+        ...eventWithColor,
         id: events.length + 1,
       };
       setEvents((prev) => [...prev, newEvent]);
     }
+    setIsOpenEvent(false);
+    setSelectedDate(null);
+    setSelectedEvent(null);
+  };
+
+  const handleDeleteEvent = (id: number) => {
+    setEvents((prev) => prev.filter((ev) => ev.id !== id));
     setIsOpenEvent(false);
     setSelectedDate(null);
     setSelectedEvent(null);
@@ -115,15 +132,19 @@ const CalendarComponent = (): ReactElement => {
         selectable
         onSelectSlot={createEvent}
         onSelectEvent={onSelectEvent}
+        eventPropGetter={eventStyleGetter}
         style={{ height: "79vh" }}
       />
       {isOpenEvent && (
         <CalendarPopup
           isOpen={isOpenEvent}
           onClose={() => setIsOpenEvent(false)}
+          onDelete={handleDeleteEvent}
           onSave={handleSaveEvent}
           defaultDate={selectedDate ?? undefined}
           event={selectedEvent ?? undefined}
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
         />
       )}
       {tooltip && <Tooltip message={tooltip} />}

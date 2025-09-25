@@ -22,14 +22,16 @@ const Dropdown = ({ items, user }: Props): ReactElement => {
   return (
     <div ref={dropdownRef} className="relative w-[186px]">
       <div className="cursor-pointer flex items-center gap-[11px]" onClick={toggleDropdown}>
-        <h4 className="text-[13px] whitespace-nowrap flex items-center leading-5">{user.name}</h4>
-        <div className="flex items-center w-4 h-4">
+        <h4 className="text-[13px] whitespace-nowrap flex items-center leading-5 max-[1076px]:hidden">
+          {user.name}
+        </h4>
+        <div className="items-center w-4 h-4 hidden sm:flex">
           <Arrow
             aria-label="arrowDown"
             className={`transition-transform duration-300 w-[11px] h-[7px] text-[#BCBCCB] ${isMenuOpen ? "rotate-180" : ""}`}
           />
         </div>
-        <img src={avatar} alt="avatar" className="w-[38px] h-[38px] rounded-full" />
+        <img src={avatar} alt="avatar" className="w-[38px] h-[38px] rounded-full ml-6 sm:ml-0" />
       </div>
       {isMenuOpen && (
         <div

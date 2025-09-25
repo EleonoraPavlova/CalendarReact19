@@ -1,16 +1,12 @@
+import moment from "moment";
 import { FormEvent, useEffect, useState } from "react";
 
 import Close from "@/assets/icons/close.svg?react";
 import Button from "@/components/button";
+import { colorsDots } from "@/components/calendar/calendar.consts";
+import { CalendarEvent } from "@/components/calendar/calendar.types";
+import ColorPicker from "@/components/calendar/color-picker";
 import Input from "@/components/input";
-
-export type CalendarEvent = {
-  id?: string | number;
-  title: string;
-  start: Date;
-  end: Date;
-  notes?: string;
-};
 
 type Props = {
   isOpen: boolean;
@@ -18,9 +14,21 @@ type Props = {
   onSave: (event: CalendarEvent) => void;
   defaultDate?: Date;
   event?: CalendarEvent;
+  selectedColor: CalendarEvent["color"];
+  setSelectedColor: (color: CalendarEvent["color"]) => void;
+  onDelete?: (id: CalendarEvent["id"]) => void;
 };
 
-const CalendarPopup = ({ isOpen, onClose, onSave, defaultDate, event }: Props) => {
+const CalendarPopup = ({
+  isOpen,
+  onClose,
+  onSave,
+  defaultDate,
+  event,
+  selectedColor,
+  setSelectedColor,
+  onDelete,
+}: Props) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -33,9 +41,8 @@ const CalendarPopup = ({ isOpen, onClose, onSave, defaultDate, event }: Props) =
       setTime(event.start.toISOString().slice(11, 16));
       setNotes(event.notes || "");
     } else if (defaultDate) {
-      const d = new Date(defaultDate);
-      setDate(d.toISOString().slice(0, 10));
-      setTime(d.toISOString().slice(11, 16));
+      setDate(moment(defaultDate).format("YYYY-MM-DD"));
+      setTime(moment(defaultDate).format("HH:mm"));
       setTitle("");
       setNotes("");
     }
@@ -52,13 +59,20 @@ const CalendarPopup = ({ isOpen, onClose, onSave, defaultDate, event }: Props) =
     const end = new Date(start.getTime() + 60 * 60 * 1000);
 
     onSave({
-      id: event?.id,
+      id: event?.id ?? 0,
       title,
       start,
       end,
       notes,
+      color: selectedColor,
     });
 
+    onClose();
+  };
+
+  const handleDelete = () => {
+    if (!event?.id) return;
+    onDelete?.(event?.id);
     onClose();
   };
 
@@ -67,10 +81,17 @@ const CalendarPopup = ({ isOpen, onClose, onSave, defaultDate, event }: Props) =
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/30 z-10">
       <div className="bg-white rounded-[10px] w-[320px] shadow-lg border border-[#43425D]">
-        <div className="flex items-center justify-end">
-          <Button type="button" onClick={onClose} variant="icon">
-            <Close className="w-5 h-5" />
-          </Button>
+        <div className="flex items-center justify-end gap-6">
+          <ColorPicker
+            colorsDots={colorsDots}
+            selectedColor={selectedColor}
+            setSelectedColor={setSelectedColor}
+          />
+          <div className="flex items-center justify-end">
+            <Button type="button" onClick={onClose} variant="icon">
+              <Close className="w-5 h-5" />
+            </Button>
+          </div>
         </div>
         <form onSubmit={handleSubmit} className="space-y-2 mt-0 mr-[20px] mb-[25px] ml-[20px]">
           <Input
@@ -105,8 +126,8 @@ const CalendarPopup = ({ isOpen, onClose, onSave, defaultDate, event }: Props) =
             maxLength={30}
           />
           <div className="flex justify-between pt-5">
-            <Button type="button" onClick={onClose} variant="danger">
-              Cancel
+            <Button type="button" onClick={handleDelete} variant="danger">
+              Delete
             </Button>
             <Button type="submit">Save</Button>
           </div>

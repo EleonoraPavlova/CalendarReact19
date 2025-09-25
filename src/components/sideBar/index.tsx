@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ReactElement } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -5,11 +6,18 @@ import { SidebarItem } from "@/shared/types";
 
 type Props = {
   menu: SidebarItem[];
+  className?: string;
 };
 
-const Sidebar = ({ menu }: Props): ReactElement => {
+const Sidebar = ({ menu, className }: Props): ReactElement => {
   return (
-    <div className="row-span-1 row-start-2 flex w-[260px]  bg-[#43425D] text-white min-h-screen gap-[7px]">
+    <div
+      className={clsx(
+        "row-span-1 row-start-2 bg-[#43425D] text-white min-h-screen gap-[7px]",
+        "w-[180px] sm:w-[200px] 2xl:w-[260px]",
+        className
+      )}
+    >
       <nav className="w-full">
         {menu.map((item) => {
           const Icon = item.icon;

@@ -11,11 +11,14 @@ type Props = {
 
 export const PageLayout = ({ items, children }: Props): ReactElement => {
   return (
-    <div className="grid min-h-screen grid-rows-[70px_1fr] grid-cols-[260px_1fr]">
-      <TopBar />
-      <SideBar menu={items} />
+    <div
+      className="grid min-h-screen grid-rows-[45px_1fr] sm:grid-rows-[50px_1fr] grid-cols-[10px_1fr]
+    sm:grid-cols-[200px_1fr] 2xl:grid-rows-[70px_1fr] 2xl:grid-cols-[260px_1fr]"
+    >
+      <TopBar items={items} />
+      <SideBar menu={items} className="hidden sm:flex" />
       <main
-        className="row-span-1 row-start-2 col-start-2 bg-[#F0F0F7] p-4 md:p-8
+        className="row-span-1 row-start-2 col-start-2 p-4 md:p-8
         lg:pt-[32px] lg:pr-[95px] lg:pb-[103px] lg:pl-[55px]
          overflow-auto h-[calc(100vh-70px)]"
       >
